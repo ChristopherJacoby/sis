@@ -1,6 +1,7 @@
 import React from 'react';
 import AddStudent from './addStudent';
 import RemoveStudent from './removeStudent';
+import { Link } from 'react-router-dom';
 
 const ViewStudents = () => {
     return (
@@ -17,7 +18,9 @@ const ViewStudents = () => {
                 <h6>Phone</h6>
                 <h6>Address</h6>
             </div>
-            <AddStudent />
+            <Link to="/addstudent">
+                <button>Add Student</button>
+            </Link>
             <RemoveStudent />
         </div>
     );

@@ -4,6 +4,7 @@ import Landing from './Components/Landing';
 import NavBar from './Components/navBar';
 import ViewStudents from './Components/viewStudents';
 import ViewMajors from './Components/viewMajors';
+import AddStudent from './Components/addStudent';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" exact component={Landing} />
           <Route path="/students" component={ViewStudents} />
           <Route path="/majors" component={ViewMajors} />
+          <Route path="/addstudent" component={AddStudent} />
         </Switch>
       </Router>
     </div>

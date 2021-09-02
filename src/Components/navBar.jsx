@@ -9,9 +9,9 @@ const NavBar = () => {
                 <div className="navbar">
                     <Link to="/students" className="navbar-brand">View Students</Link>
                     <Link to="/majors" className="navbar-brand">View Majors</Link>
-                    {/* <Link to="/signup" className="navbar-brand">Sign Up</Link>
+                    <Link to="/signup" className="navbar-brand">Sign Up</Link>
                     <Link to="/signin" className="navbar-brand">Sign In</Link>
-                    <Link to="/logout" className="navbar-brand">Log Out</Link> */}
+                    <Link to="/logout" className="navbar-brand">Log Out</Link>
                 </div>
             </nav>
         </div>

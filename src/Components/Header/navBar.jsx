@@ -9,14 +9,8 @@ const NavBar = () => {
           Excelsior College
         </Link>
         <div className="navbar">
-          <Link to="/signup" className="navbar-brand">
-            Sign Up
-          </Link>
           <Link to="/signin" className="navbar-brand">
             Sign In
-          </Link>
-          <Link to="/logout" className="navbar-brand">
-            Log Out
           </Link>
         </div>
       </nav>

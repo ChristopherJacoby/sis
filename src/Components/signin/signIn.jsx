@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import FormInput from './form-input/form-input.component';
-import { auth } from '../../firebase/firebase.util';
+import FormInput from "../form-input/form-input.component";
+import { auth } from "../../firebase/firebase.util";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
@@ -23,12 +23,12 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      setCredentials({ email: '', password: '' });
+      setCredentials({ email: "", password: "" });
     } catch (error) {
       console.log(error);
     }
@@ -36,8 +36,8 @@ const SignIn = () => {
     setCredentials({
       email: "",
       password: ""
-    })
-  }
+    });
+  };
 
   // const auth = getAuth();
   // const signUp = e => {
@@ -56,14 +56,14 @@ const SignIn = () => {
 
   return (
     <div>
-      <h2>Siggn In</h2>
+      <h2>Sign In</h2>
       <p>Sign in with your email</p>
       <form onSubmit={handleSubmit}>
         <FormInput
           type="email"
           onChange={handleUpdate}
           name="email"
-          label='Email'
+          label="Email"
           value={credentials.email}
           required
         />
@@ -72,7 +72,7 @@ const SignIn = () => {
           type="password"
           onChange={handleUpdate}
           name="password"
-          label='Password'
+          label="Password"
           value={credentials.password}
           required
         />

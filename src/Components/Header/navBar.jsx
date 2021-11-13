@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import auth from "../../firebase/firebase.util";
 
-const NavBar = () => {
+const NavBar = ({ currentUser }) => {
   return (
     <div>
       <nav className="navbar navbar-light bg-light">
@@ -9,9 +10,15 @@ const NavBar = () => {
           Excelsior College
         </Link>
         <div className="navbar">
-          <Link to="/signin" className="navbar-brand">
-            Sign In
-          </Link>
+          {currentUser ? (
+            <div className="option" onClick={() => auth.signOut()}>
+              Sign Out
+            </div>
+          ) : (
+            <Link className="option" to="/signin">
+              Sign In
+            </Link>
+          )}
         </div>
       </nav>
     </div>

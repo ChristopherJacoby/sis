@@ -11,6 +11,16 @@ const firebaseConfig = {
   appId: "1:642196301743:web:bc94962ffc00d91afdf15a"
 };
 
+const onAuthStateChange = () => {
+  return firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log("The user is logged in");
+    } else {
+      console.log("The user is not logged in");
+    }
+  });
+};
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 

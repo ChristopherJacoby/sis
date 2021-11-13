@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { auth } from "../../firebase/firebase.util";
 
@@ -10,15 +10,12 @@ const SignIn = () => {
 
   const { email, password } = credentials;
 
-  // const emailRef = useRef(null);
-  // const passwordRef = useRef(null);
-
   const handleUpdate = (e) => {
-    const { value, id } = e.target;
+    const { value, name } = e.target;
     setCredentials((prevValue) => {
       return {
         ...prevValue,
-        [id]: value
+        [name]: value
       };
     });
   };
@@ -39,21 +36,6 @@ const SignIn = () => {
     });
   };
 
-  // const auth = getAuth();
-  // const signUp = e => {
-  //   e.preventDefault();
-  //   signInWithEmailAndPassword(
-  //     emailRef.current.value,
-  //     passwordRef.current.value
-  //   ).then((userCredential) => {
-  //     const user = userCredential.user;
-  //   })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //     });
-  // }
-
   return (
     <div>
       <h2>Sign In</h2>
@@ -64,7 +46,7 @@ const SignIn = () => {
           onChange={handleUpdate}
           name="email"
           label="Email"
-          value={credentials.email}
+          value={email}
           required
         />
 
@@ -73,10 +55,10 @@ const SignIn = () => {
           onChange={handleUpdate}
           name="password"
           label="Password"
-          value={credentials.password}
+          value={password}
           required
         />
-        <input type="button" value="Submit" />
+        <input type="submit" value="Sign In" />
       </form>
     </div>
   );

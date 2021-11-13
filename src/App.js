@@ -6,48 +6,30 @@ import NavBar from "./Components/Header/navBar";
 import AddStudent from "./Components/addStudent";
 import SignInAndSignUp from "./Components/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { useEffect, useState } from "react";
-import { auth, createUserProfileDocument } from "./firebase/firebase.util";
+import getFirebase from "./firebase/firebase.util";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState({
-    loggedIn: false
-  });
+  const [currentUser, setCurrentUser] = useState(null);
 
-  // const checkLogin = () => {
-  //   if (!currentUser.loggedIn) {
-  //     return <span>User is logged out</span>;
-  //   } else {
-  //     return <span>User is logged in</span>;
-  //   }
-  // };
-  unsubscribeFromAuth = null;
-
+  // Listen to onAuthStateChanged
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    const firebase = getFirebase();
 
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
-          });
-        });
-      }
-      setCurrentUser({ currentUser: userAuth });
-    });
-
-    return function cleanup() {
-      //unsubscribeFromAuth();
-    };
+    if (firebase) {
+      firebase.auth().onAuthStateChanged((authUser) => {
+        if (authUser) {
+          setCurrentUser(authUser.email);
+        } else {
+          setCurrentUser(null);
+        }
+      });
+    }
   });
 
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        <NavBar currentUser={currentUser} />
         <Switch>
           <Route path="/" exact component={Landing} />
           <Route path="/addstudent" component={AddStudent} />

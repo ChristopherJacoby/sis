@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import { auth } from "../../firebase/firebase.util";
+import getFirebase from "../../firebase/firebase.util";
 
-const SignIn = () => {
+const SignIn = (props) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
   });
 
   const { email, password } = credentials;
+  const firebaseInstance = getFirebase();
+  //const {userEmail} = props.user.email
 
   const handleUpdate = (e) => {
     const { value, name } = e.target;
@@ -24,12 +26,16 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setCredentials({ email: "", password: "" });
+      if (firebaseInstance) {
+        const user = await firebaseInstance
+          .auth()
+          .signInWithEmailAndPassword(email, password);
+        console.log("user", user);
+        alert(`Welcome back ${user.user._delegate.email}!`);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
-
     setCredentials({
       email: "",
       password: ""

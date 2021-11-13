@@ -11,42 +11,14 @@ const firebaseConfig = {
   appId: "1:642196301743:web:bc94962ffc00d91afdf15a"
 };
 
-const onAuthStateChange = () => {
-  return firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log("The user is logged in");
-    } else {
-      console.log("The user is not logged in");
-    }
-  });
-};
-
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
-  const snapshot = await userRef.get();
-
-  if (!snapshot.exists) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
-
-    try {
-      await userRef.set({
-        displayName,
-        email,
-        createdAt,
-        ...additionalData
-      });
-    } catch (error) {
-      console.log(`Error creating user`, error.message);
-    }
-  }
-  return userRef;
-};
-
-firebase.initializeApp(firebaseConfig);
-
+let instance;
 export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export default firebase;
+export default function getFirebase() {
+  if (typeof window !== "undefined") {
+    if (instance) return instance;
+    instance = firebase.initializeApp(firebaseConfig);
+    return instance;
+  }
+
+  return null;
+}

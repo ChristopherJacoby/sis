@@ -12,7 +12,6 @@ const firebaseConfig = {
 };
 
 let instance;
-export const auth = firebase.auth();
 export default function getFirebase() {
   if (typeof window !== "undefined") {
     if (instance) return instance;
@@ -22,3 +21,5 @@ export default function getFirebase() {
 
   return null;
 }
+
+export const auth = firebase.auth();

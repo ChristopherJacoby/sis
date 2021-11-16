@@ -28,13 +28,14 @@ const SignUp = () => {
       alert("Passwords do not match.");
       return;
     }
+
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
       await createUserProfileDocument(user, { displayName });
-      await setCredentials({
+      setCredentials({
         displayName: "",
         email: "",
         password: "",

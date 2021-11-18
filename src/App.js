@@ -6,25 +6,26 @@ import NavBar from "./Components/Header/navBar";
 import AddStudent from "./Components/addStudent";
 import SignInAndSignUp from "./Components/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { useEffect, useState } from "react";
-import getFirebase from "./firebase/firebase.util";
+// import auth from "./firebase/firebase.util";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   // Listen to onAuthStateChanged
-  useEffect(() => {
-    const firebase = getFirebase();
+  // useEffect(() => {
+  //   const firebase = auth;
 
-    if (firebase) {
-      firebase.auth().onAuthStateChanged((authUser) => {
-        if (authUser) {
-          setCurrentUser(authUser.email);
-        } else {
-          setCurrentUser(null);
-        }
-      });
-    }
-  });
+  //   if (firebase) {
+  //     firebase.auth().onAuthStateChanged((authUser) => {
+  //       if (authUser) {
+  //         setCurrentUser(authUser.email);
+  //         console.log(currentUser);
+  //       } else {
+  //         setCurrentUser(null);
+  //       }
+  //     });
+  //   }
+  // }, []);
 
   return (
     <div className="App">

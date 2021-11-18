@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.util";
+import { useSignup } from '../../CustomHooks/useSignup';
 
 const SignUp = () => {
   const [credentials, setCredentials] = useState({
@@ -10,7 +10,7 @@ const SignUp = () => {
     confirmPassword: ""
   });
   const { displayName, email, password, confirmPassword } = credentials;
-
+  const { signup, isPending, error } = useSignup();
   const handleChange = (event) => {
     const { value, name } = event.target;
     setCredentials((prevValue) => {
@@ -24,32 +24,12 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
+    if (confirmPassword !== password) {
+      alert("Passwords do not match.")
     }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      await setCredentials({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.log(error);
-      setCredentials({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    }
+    signup(email, password, displayName)
   };
+
 
   return (
     <div>
@@ -88,7 +68,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
-        <input type="submit" value="Sign Up" />
+        {isPending ? <button disabled>Loading...</button>
+          : <input type="submit" value="Sign Up" />
+        }
+        {error && <p>{error}</p>}
       </form>
     </div>
   );

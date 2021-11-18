@@ -24,8 +24,32 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (confirmPassword !== password) {
-      alert("Passwords do not match.")
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await createUserProfileDocument(user, { displayName });
+      setCredentials({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
+    } catch (error) {
+      console.log(error);
+      setCredentials({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
     }
     signup(email, password, displayName)
   };

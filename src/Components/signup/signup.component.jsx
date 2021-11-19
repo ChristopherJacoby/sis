@@ -11,6 +11,7 @@ const SignUp = () => {
   });
   const { displayName, email, password, confirmPassword } = credentials;
   const { signup, isPending, error } = useSignup();
+
   const handleChange = (event) => {
     const { value, name } = event.target;
     setCredentials((prevValue) => {
@@ -28,6 +29,12 @@ const SignUp = () => {
       alert("Passwords do not match.")
     }
     signup(email, password, displayName)
+    setCredentials({
+      displayName: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    })
   };
 
 

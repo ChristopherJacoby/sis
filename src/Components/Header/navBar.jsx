@@ -1,20 +1,30 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import SignOut from "../signOut/signOut";
+import { useLogout } from '../../CustomHooks/useLogout';
+import { useAuthContext } from '../../CustomHooks/useAuthContext'
 
-const NavBar = ({ currentUser }) => {
+const NavBar = () => {
+
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+
   return (
-    <div>
-      <nav className="navbar navbar-light bg-light">
-        <Link to="/" className="navbar-brand">
-          Excelsior College
-        </Link>
-        <div className="navbar">
-          <span>{currentUser}</span>
-          {currentUser ? <SignOut /> : <Link to="/signin">Sign In</Link>}
+
+    <nav className="navbar navbar-light bg-light">
+      <Link to="/" className="navbar-brand">
+        Excelsior College
+          </Link>
+      {user && (
+        <div>
+          <li>Hello {user.displayName}</li>
+          <li className="btn" onClick={logout}>Log out</li>
         </div>
-      </nav>
-    </div>
+      )}
+      {!user && (
+        <div>
+          <li><Link to='/signin'>Login</Link></li>
+        </div>
+      )}
+    </nav>
   );
 };
 

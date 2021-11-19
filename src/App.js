@@ -1,21 +1,30 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Landing from "./Components/Student-DB/student.component";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "./Components/Header/navBar";
 import SignInAndSignUp from "./Components/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import Students from './Components/Student-DB/student.component';
+import { useAuthContext } from './CustomHooks/useAuthContext';
 
 
 const App = () => {
+  const { authIsReady, user } = useAuthContext()
 
   return (
     <div className="App">
-      <Router>
-        <NavBar />
-        <Switch>
-          <Route path="/" exact component={Landing} />
-          <Route path="/signin" component={SignInAndSignUp} />
-        </Switch>
-      </Router>
+      {authIsReady && (
+        <Router>
+          <NavBar />
+          <Switch>
+            <Route path="/" exact component={SignInAndSignUp} />
+            <Route path="/students" exact>
+              {user ? <Students /> : <Redirect to="/signin" />}
+            </Route>
+            <Route path="/signin">
+              {user ? <Redirect to="/students" /> : <SignInAndSignUp />}
+            </Route>
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 };

@@ -13,11 +13,12 @@ const NavBar = () => {
   return (
 
     <nav className="navbar navbar-light bg-light">
-      <Link to="/" className="navbar-brand margin">
+      <h1 className="navbar-brand margin">
         Excelsior College
-      </Link>
+      </h1>
       {user && (
         <div>
+          <li className="btn shadow-none"><Link className="btn shadow-none" to='/students'>Student Database</Link></li>
           <span className="navbar-text">Logged in as: {user.displayName}</span>
           <li className="btn margin" onClick={logout}>Log out</li>
         </div>

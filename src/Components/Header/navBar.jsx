@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useLogout } from '../../CustomHooks/useLogout';
 import { useAuthContext } from '../../CustomHooks/useAuthContext'
 
+//styles
+import './navBar.styles.css'
+
 const NavBar = () => {
 
   const { logout } = useLogout();
@@ -10,18 +13,18 @@ const NavBar = () => {
   return (
 
     <nav className="navbar navbar-light bg-light">
-      <Link to="/" className="navbar-brand">
+      <Link to="/" className="navbar-brand margin">
         Excelsior College
-          </Link>
+      </Link>
       {user && (
         <div>
-          <li>Hello {user.displayName}</li>
-          <li className="btn" onClick={logout}>Log out</li>
+          <span className="navbar-text">Logged in as: {user.displayName}</span>
+          <li className="btn margin" onClick={logout}>Log out</li>
         </div>
       )}
       {!user && (
         <div>
-          <li><Link to='/signin'>Login</Link></li>
+          <li className="btn shadow-none margin"><Link className="btn shadow-none" to='/signin'>Login</Link></li>
         </div>
       )}
     </nav>

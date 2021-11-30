@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import NavBar from "./Components/Header/navBar";
+import NavBar from "./Components/Header/navBar.component";
 import SignInAndSignUp from "./Components/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Students from './Components/Student-DB/student.component';
 import { useAuthContext } from './CustomHooks/useAuthContext';

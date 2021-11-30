@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { useLogin } from '../../CustomHooks/useLogin';
+import { useHistory } from "react-router-dom";
 
 //style
 import './signin.styles.css'
@@ -12,6 +13,7 @@ const SignIn = () => {
   });
   const { login, isPending, error } = useLogin()
   const { email, password } = credentials;
+  const history = useHistory();
 
   const handleUpdate = (e) => {
     const { value, name } = e.target;
@@ -30,6 +32,7 @@ const SignIn = () => {
       email: "",
       password: ""
     })
+    history.push("/students")
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { useSignup } from '../../CustomHooks/useSignup';
+import { useHistory } from 'react-router-dom';
 
 //styles
 import './signup.styles.css';
@@ -14,6 +15,7 @@ const SignUp = () => {
   });
   const { displayName, email, password, confirmPassword } = credentials;
   const { signup, isPending, error } = useSignup();
+  const history = useHistory();
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -39,6 +41,7 @@ const SignUp = () => {
       password: "",
       confirmPassword: ""
     })
+    history.push("/students");
   };
 
 

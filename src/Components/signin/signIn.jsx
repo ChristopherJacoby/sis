@@ -5,7 +5,7 @@ import { useLogin } from '../../CustomHooks/useLogin';
 //style
 import './signin.styles.css'
 
-const SignIn = (props) => {
+const SignIn = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""

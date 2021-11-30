@@ -30,8 +30,9 @@ const SignUp = () => {
 
     if (confirmPassword !== password) {
       alert("Passwords do not match.")
+    } else {
+      signup(email, password, displayName)
     }
-    signup(email, password, displayName)
     setCredentials({
       displayName: "",
       email: "",

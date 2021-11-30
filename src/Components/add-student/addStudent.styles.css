@@ -1,0 +1,5 @@
+.card {
+    display: grid;
+    border: black solid 1px;
+    text-align: center;
+}

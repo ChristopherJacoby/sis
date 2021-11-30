@@ -20,7 +20,6 @@ export const useLogin = () => {
 
             setIsPending(false)
             setError(null);
-            console.log(res.user)
 
             //update state
             if (!isCancelled) {

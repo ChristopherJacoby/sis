@@ -1,6 +1,6 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, onSnapshot, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3T3u7hOpwi4OO9zgMJqpseVH7QWo-a9s",
@@ -11,12 +11,11 @@ const firebaseConfig = {
   appId: "1:642196301743:web:bc94962ffc00d91afdf15a"
 };
 
-firebase.initializeApp(firebaseConfig)
+//initiaaize Firebase app
+initializeApp(firebaseConfig)
 
-const auth = firebase.auth();
-const db = firebase.firestore();
-db.settings({ timestampsInSnapshots: true })
-//timestamp
-const timestamp = firebase.firestore.Timestamp
+//init services
+const auth = getAuth();
+const db = getFirestore();
 
-export { auth, db, timestamp };
+export { auth, db, collection, onSnapshot, addDoc };

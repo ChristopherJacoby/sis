@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { db } from '../firebase/firebase.util';
+import { db, addDoc } from '../firebase/firebase.util';
 
 export const useCreateStudent = () => {
     const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ export const useCreateStudent = () => {
 
         try {
             //create entry in database
-            const response = await db.collection('students').add({
+            const response = await addDoc(db, {
                 studentID: studentID,
                 fname: fname,
                 lname: lname,

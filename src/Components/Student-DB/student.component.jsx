@@ -46,14 +46,18 @@ const StudentDB = () => {
             </tr>
           </thead>
           <tbody>
-            {studentDB.map(student => {
-              <tr key={student.id}>
-                <th scope="row">{student.studentID}</th>
-                <td>{`${student.fname} ${student.lname}`}</td>
-                <td>{student.email}</td>
-                <td>{student.phone}</td>
-              </tr>
-            })}
+            {
+              studentDB.map(student => {
+                return (
+                  <tr key={student.id}>
+                    <th scope="row">{student.studentID}</th>
+                    <td>{`${student.fname} ${student.lname}`}</td>
+                    <td>{student.email}</td>
+                    <td>{student.phone}</td>
+                  </tr>
+                )
+              })
+            }
           </tbody>
         </table>
       </div>

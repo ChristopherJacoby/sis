@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import { useCreateStudent } from '../../CustomHooks/useCreateStudent';
+import { useHistory } from 'react-router-dom';
 
 //styles
 import './addStudent.styles.css';
@@ -15,9 +16,9 @@ const AddStudent = () => {
         birthDate: "",
         phone: ""
     });
-
     const { studentID, fname, lname, email, birthDate, phone } = student
     const { createStudent } = useCreateStudent();
+    const history = useHistory();
 
     const handleUpdate = (e) => {
         const { name, value } = e.target;
@@ -42,6 +43,7 @@ const AddStudent = () => {
             birthDate: "",
             phone: ""
         })
+        history.push("/students");
     }
 
     return (
